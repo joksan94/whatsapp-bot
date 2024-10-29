@@ -4,7 +4,12 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild": "sleep 60 && npm install"
+  },
+  "engines": {
+    "node": "22.x",
+    "npm": "10.x"
   },
   "keywords": [],
   "author": "",
