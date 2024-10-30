@@ -12,7 +12,7 @@ const usuarioControl = "5217772585287@c.us"; // Reemplaza con el chatId del usua
 let escuchando = true;
 
 venom
-  .create({ session: "mi-sesion", headless: false })
+  .create({ session: "mi-sesion", headless: true }) // Cambiado a headless: true
   .then((client) => {
     console.log("Venom bot iniciado correctamente");
     obtenerNombreGrupo(client, grupoEspecifico); // Obtener el nombre del grupo
@@ -23,17 +23,24 @@ venom
   });
 
 function obtenerNombreGrupo(client, chatId) {
-  client.getAllChats().then((chats) => {
-    const grupo = chats.find((chat) => chat.id._serialized === chatId);
-    if (grupo) {
-      console.log(`Nombre del grupo: ${grupo.name}`);
-    } else {
-      console.log(`No se encontró ningún grupo con el chatId: ${chatId}`);
-    }
-  });
+  console.log("Obteniendo nombre del grupo...");
+  client
+    .getAllChats()
+    .then((chats) => {
+      const grupo = chats.find((chat) => chat.id._serialized === chatId);
+      if (grupo) {
+        console.log(`Nombre del grupo: ${grupo.name}`);
+      } else {
+        console.log(`No se encontró ningún grupo con el chatId: ${chatId}`);
+      }
+    })
+    .catch((error) => {
+      console.log("Error obteniendo chats:", error);
+    });
 }
 
 function start(client) {
+  console.log("Iniciando escucha de mensajes...");
   client.onMessage((message) => {
     console.log("Mensaje recibido:", message.body, "de:", message.from);
 
