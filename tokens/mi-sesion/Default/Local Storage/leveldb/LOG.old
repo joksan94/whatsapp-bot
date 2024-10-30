@@ -1,6 +1,0 @@
-2024/10/29-09:41:40.838 3803 Reusing MANIFEST /Users/joksan/whatsapp-bot/tokens/mi-sesion/Default/Local Storage/leveldb/MANIFEST-000001
-2024/10/29-09:41:40.841 3803 Recovering log #29
-2024/10/29-09:41:40.842 3803 Reusing old log /Users/joksan/whatsapp-bot/tokens/mi-sesion/Default/Local Storage/leveldb/000029.log 
-2024/10/29-09:43:41.509 2c07 Level-0 table #33: started
-2024/10/29-09:43:41.515 2c07 Level-0 table #33: 18504 bytes OK
-2024/10/29-09:43:41.521 2c07 Delete type=0 #29
