@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-postbuild": "sleep 60 && npm install"
+    "heroku-postbuild": "sleep 60 && npm install",
+    "build": "react-scripts build"
   },
   "engines": {
     "node": "22.x",
