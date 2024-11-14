@@ -1,12 +1,10 @@
 const venom = require("venom-bot");
 
 // El chatId del grupo al que quieres que responda el bot
-const grupoEspecifico = "5217226471028-1635736188@g.us"; // ChatId del grupo "
-//"120363334875848107@g.us" test
-//"5217226471028-1635736188@g.us" transporte
+const grupoEspecifico = "5217226471028-1635736188@g.us";
 
 // El chatId del usuario que puede activar o desactivar la escucha
-const usuarioControl = "5217772585287@c.us"; // Reemplaza con el chatId del usuario de control
+const usuarioControl = "5217772585287@c.us";
 
 // Variable para controlar si el bot está escuchando
 let escuchando = true;
@@ -14,13 +12,16 @@ let escuchando = true;
 venom
   .create({
     session: "mi-sesion",
-    headless: false, // Cambiado a headless: false para ver el navegador
-    useChrome: true, // Asegúrate de que Chrome esté instalado
-    qrTimeout: 0, // Deshabilitar el tiempo de espera del QR
+    headless: true, // Cambiado a true para despliegue en servidores como Heroku
+    useChrome: true,
+    qrTimeout: 0,
+    puppeteerOptions: {
+      args: ["--no-sandbox", "--disable-setuid-sandbox"], // Opciones necesarias para Heroku
+    },
   })
   .then((client) => {
     console.log("Venom bot iniciado correctamente");
-    obtenerNombreGrupo(client, grupoEspecifico); // Obtener el nombre del grupo
+    obtenerNombreGrupo(client, grupoEspecifico);
     start(client);
   })
   .catch((error) => {
@@ -49,7 +50,6 @@ function start(client) {
   client.onMessage((message) => {
     console.log("Mensaje recibido:", message.body, "de:", message.from);
 
-    // Comandos para activar o desactivar la escucha desde el chat privado
     if (message.from === usuarioControl) {
       console.log("Mensaje de control recibido:", message.body);
       if (message.body.toLowerCase() === "activar") {
@@ -68,7 +68,6 @@ function start(client) {
       }
     }
 
-    // Verificar que el mensaje proviene del grupo específico y que la escucha está activada
     if (message.from === grupoEspecifico && escuchando) {
       console.log("Mensaje recibido del grupo específico:", message.body);
       const mensaje = message.body.toLowerCase();
@@ -76,26 +75,17 @@ function start(client) {
         "disponibilidad",
         "necesitan",
         "necesitamos",
-        "Necesitamos",
-        "Requerimos",
         "requerimos",
         "se solicita",
-        "se solicitan",
-        "Se solicitan",
         "solicitamos",
-        "Se necesita",
         "se necesita",
-        "Requiero",
         "requiero",
-        "Solicitan",
-        "solicitan",
-        "Necesito",
         "necesito",
+        "solicitan",
       ];
 
       if (palabrasClave.some((palabra) => mensaje.includes(palabra))) {
         console.log("Palabra clave encontrada en el mensaje:", message.body);
-        // Responder automáticamente solo en el grupo especificado
         client.sendText(message.from, "1 trailer caja seca");
       } else {
         console.log(
