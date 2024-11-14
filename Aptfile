@@ -1,4 +1,11 @@
-# Aptfile para dependencias APT
+libatk1.0-0
+libatk-bridge2.0-0
 libnss3
+libgdk-pixbuf2.0-0
 libx11-xcb1
-libgbm1
+libxss1
+libappindicator3-1
+libasound2
+libgconf-2-4
+libnss3-dev
+libxrandr2
